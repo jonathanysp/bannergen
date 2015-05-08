@@ -60,7 +60,6 @@
 			url: "/gentitle",
 			type: "GET",
 		}).done(function(data) {
-			console.log(data);
 			$(".title").fadeOut(400, function() {
 				$(".title").text(data).fadeIn();
 				title = data;
@@ -79,7 +78,6 @@
 			url: "/genteaser",
 			type: "GET",
 		}).done(function(data) {
-			console.log(data);
 			$(".teaser").fadeOut(400, function() {
 				$(".teaser").text(data).fadeIn();
 				teaser = data;
