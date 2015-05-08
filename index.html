@@ -39,7 +39,7 @@
 						Click to generate course description 
 					</p>
 					<br>
-					<div onclick="share()">
+					<div class="share" onclick="share()" style="display: none">
 						Share on Facebook
 					</div>
 				</div>
@@ -52,6 +52,8 @@
 <script type="text/javascript">
 	var title;
 	var teaser;
+	var count = 0;
+
 
 	function newTitle() {
 		$.ajax({
@@ -63,7 +65,13 @@
 				$(".title").text(data).fadeIn();
 				title = data;
 			});
-		});	
+		});
+
+		count = count | 1;
+
+		if (count === 3) {
+			showShare();
+		}
 	}
 
 	function newTeaser() {
@@ -76,13 +84,23 @@
 				$(".teaser").text(data).fadeIn();
 				teaser = data;
 			});
-		});		
+		});
+
+		count = count | 2;
+
+		if (count === 3) {
+			showShare();
+		}	
+	}
+
+	function showShare() {
+		$(".share").fadeIn();
 	}
 
 	function share() {
 		FB.ui({
 		  method: 'feed',
-		  link: 'https://developers.facebook.com/docs/',
+		  link: 'https://bannergen.jonathanysp.com',
 		  name: title,
 		  description: teaser,
 		}, function(response){});
