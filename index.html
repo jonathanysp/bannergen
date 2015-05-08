@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>Banner Course Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+<link href="index.css" rel="stylesheet">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1566613953602494',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+	<div class="site-wrapper">
+		<div class="site-wrapper-inner">
+			<div class="cover-container">
+				<div class="inner-cover">
+					<h1 class="gens cover-heading title" onclick="newTitle()">
+						Click to generate course title
+					</h1>
+					<p class="gens cover-heading teaser" onclick="newTeaser()">
+						Click to generate course description 
+					</p>
+					<br>
+					<div onclick="share()">
+						Share on Facebook
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<script type="text/javascript">
+	var title;
+	var teaser;
+
+	function newTitle() {
+		$.ajax({
+			url: "/gentitle",
+			type: "GET",
+		}).done(function(data) {
+			console.log(data);
+			$(".title").fadeOut(400, function() {
+				$(".title").text(data).fadeIn();
+				title = data;
+			});
+		});	
+	}
+
+	function newTeaser() {
+		$.ajax({
+			url: "/genteaser",
+			type: "GET",
+		}).done(function(data) {
+			console.log(data);
+			$(".teaser").fadeOut(400, function() {
+				$(".teaser").text(data).fadeIn();
+				teaser = data;
+			});
+		});		
+	}
+
+	function share() {
+		FB.ui({
+		  method: 'feed',
+		  link: 'https://developers.facebook.com/docs/',
+		  name: title,
+		  description: teaser,
+		}, function(response){});
+	}
+
+</script>
+
+</html>
