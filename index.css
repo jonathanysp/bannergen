@@ -25,7 +25,7 @@ p {
   padding-top: 5px;
 }
 
-h1:hover,p:hover {
+.share:hover,h1:hover,p:hover {
   color: #666;
   cursor: hand;
 }
