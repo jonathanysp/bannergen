@@ -30,6 +30,8 @@ db.find({}, function(err, docs) {
 
 })
 
+// Markov Object
+// Code from: http://www.soliantconsulting.com/blog/2013/02/draft-title-generator-using-markov-chains
 function Markov() {
 	var terminals = {};
 	var startwords = [];
